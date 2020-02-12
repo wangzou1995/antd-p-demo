@@ -30,6 +30,11 @@ const errorHandler = (error: { response: Response }): Response | undefined => {
   const { response } = error;
   if (response && response.status) {
     if (response.status === 401) {
+      // 判断是否存在过期token
+      let token = localStorage.getItem('yw_token')
+      if (token) {
+        localStorage.removeItem('yw_token')
+      }
       router.push('/user/login');
       return;
     } else {
@@ -75,7 +80,7 @@ request.interceptors.request.use((url, options) => {
   //‘Content-Type‘: ‘application/x-www-form-urlencoded‘,
     'Accept': 'application/json',
   };
-  if (null !== token) {
+  if (null !== token && '/merchant/loginInterface' !== url) {
     headers['Authorization'] = 'Bearer ' + token.replace(/\"/g, "")
   } else {
     // 判断是否在执行登录操作

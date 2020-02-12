@@ -168,7 +168,7 @@ const TableList: React.FC<TableListProps> = () => {
       <ProTable<AppTableListItem>
         headerTitle="查询表格"
         actionRef={actionRef}
-        rowKey="key"
+        rowKey="id"
         toolBarRender={(action, {selectedRows}) => [
           <Button icon="plus" type="primary" onClick={() => {
             handleAction(Operate.Add)

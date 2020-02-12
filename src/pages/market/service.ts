@@ -1,9 +1,17 @@
 import request from '@/utils/request';
 import {MarketTableListItem, TableListParams} from './data.d';
-
+const BASE_URL = '/merchant/jsonreq.action'
 export async function queryMarket(params?: { pageSize?: number; current?: number; [p: string]: any } | undefined) {
-  return request('/api/market', {
-    params,
+  return request(BASE_URL, {
+    method: 'POST',
+    data: {
+      code: "getMarketAppList",
+      entity: {
+        ...params,
+        page: {pageSize: params?.pageSize, pageIndex: params?.current},
+        orderByArray: [{fieldName: "id", order: "DESC"}]
+      }
+    }
   });
 }
 

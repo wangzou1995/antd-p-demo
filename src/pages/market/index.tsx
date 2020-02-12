@@ -1,4 +1,4 @@
-import {Divider, Form,} from 'antd';
+import {Divider, Form, Tag,} from 'antd';
 import React, {useRef} from 'react';
 import {FormComponentProps} from 'antd/es/form';
 import {PageHeaderWrapper} from '@ant-design/pro-layout';
@@ -24,7 +24,7 @@ const TableList: React.FC<TableListProps> = () => {
     },
     {
       title: '商户号',
-      dataIndex: 'tenantcode',
+      dataIndex: 'tenantInfo.tenantcode',
     },
     {
       title: '数据库类型',
@@ -32,11 +32,12 @@ const TableList: React.FC<TableListProps> = () => {
     },
     {
       title: '发布者',
-      dataIndex: 'publisher',
+      dataIndex: 'publisherInfo.nickname',
     },
     {
       title: '发布日期',
       dataIndex: 'publishdate',
+      valueType: 'date'
     },
     {
       title:'客户端类型',
@@ -44,11 +45,29 @@ const TableList: React.FC<TableListProps> = () => {
     },
     {
       title:'版本',
-      dataIndex: 'versionid'
+      dataIndex: 'version'
     },
     {
       title:'费用类型',
-      dataIndex: 'devicetype'
+      dataIndex: 'pricestrategy',
+      valueEnum: {
+        0: {
+          text: '免费'
+        },
+        2: {
+          text: '年费',
+        }
+      },
+      render: (_: any, record: MarketTableListItem) => (
+        <span>
+          {
+            <Tag color={record.pricestrategy === 0 ? 'green' : 'geekblue'} key={record.id}>
+              {_ + (record.pricestrategy === 0 ? '' : record.price)}
+            </Tag>
+
+          }
+        </span>
+      ),
     },
     {
       title: '操作',
@@ -72,7 +91,7 @@ const TableList: React.FC<TableListProps> = () => {
       <ProTable<MarketTableListItem>
         headerTitle="查询表格"
         actionRef={actionRef}
-        rowKey="key"
+        rowKey="id"
         request={params => queryMarket(params)}
         columns={columns}
       />

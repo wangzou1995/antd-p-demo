@@ -10,6 +10,7 @@ export async function queryTenant(params?: { pageSize?: number; current?: number
     }
   });
 }
+
 export async function removeTenant(params: { key: number[] }) {
   return request('/merchant/rule', {
     method: 'POST',

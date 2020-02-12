@@ -7,7 +7,19 @@ let tableListDataSource: MarketTableListItem[] = [];
 
 for (let i = 0; i < 10; i += 1) {
   tableListDataSource.push({
-    key: i,
+    connectorurl: "",
+    createtime: "",
+    designversionid: 0,
+    id: 0,
+    price: 0,
+    produrl: "",
+    publisherInfo: undefined,
+    status: 0,
+    tenantInfo: undefined,
+    tenantid: 0,
+    updatetime: "",
+    version: 0,
+    versiontype: 0,
     tenantcode: `tenantCode ${i}`,
     prodcode: 0,
     prodname: `tenantCode ${i}`,
@@ -16,7 +28,7 @@ for (let i = 0; i < 10; i += 1) {
     publishdate: `tenantCode ${i}`,
     devicetype: 0,
     versionid: 0,
-    pricestrategy: 0,
+    pricestrategy: 0
   });
 }
 
@@ -64,7 +76,7 @@ function postMarket(req: Request, res: Response, u: string, b: Request) {
   switch (method) {
     /* eslint no-case-declarations:0 */
     case 'delete':
-      tableListDataSource = tableListDataSource.filter(item => params.key.indexOf(item.key) === -1);
+      tableListDataSource = tableListDataSource.filter(item => params.key.indexOf(item.id) === -1);
       break;
     case 'post':
       const i = Math.ceil(Math.random() * 10000);
@@ -76,7 +88,7 @@ function postMarket(req: Request, res: Response, u: string, b: Request) {
       break;
     case 'update':
       tableListDataSource = tableListDataSource.map(item => {
-        if (item.key === params.key) {
+        if (item.id === params.key) {
           return {...item, ...params};
         }
         return item;
