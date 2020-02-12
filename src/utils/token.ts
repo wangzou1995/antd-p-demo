@@ -1,0 +1,15 @@
+
+
+// use localStorage to store the authority info, which might be sent from server in actual project.
+export function getToken(): string | null {
+  const tokenStr = localStorage.getItem('yw_token') ;
+  // authorityString could be admin, "admin", ["admin"]
+  return tokenStr;
+}
+
+export function setToken(token: string ): void {
+
+  localStorage.setItem('yw_token', JSON.stringify(token));
+  // auto reload
+
+}
