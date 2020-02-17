@@ -5,7 +5,7 @@ import {FormComponentProps} from "antd/es/form";
 import Operate from './Opreate';
 
 
-const FormItem = Form.Item;
+const {Item} = Form;
 
 /**
  * 校验规则
@@ -41,7 +41,7 @@ export interface TableCol {
   values: T
 }
 
-class TableRowUpdateAndAdd<T> extends Component<CreateFormProps<T>, any> {
+class TableRowUpdateAndAdd<T> extends Component<CreateFormProps<T>> {
   render() {
     const {modalVisible, form, onSubmit: handleAdd, onCancel, row, values} = this.props;
     const okHandle = () => {
@@ -58,18 +58,20 @@ class TableRowUpdateAndAdd<T> extends Component<CreateFormProps<T>, any> {
         visible={modalVisible}
         onOk={okHandle}
         onCancel={() => onCancel()}
-      > {
+      >
+        <Form>{
         row.cols && row.cols.map((e) => {
-          return <FormItem key={e.name} labelCol={{span: 5}} wrapperCol={{span: 15}} label={e.label}>
+          return <Item key={e.name} labelCol={{span: 5}} wrapperCol={{span: 15}} label={e.label}>
             {
               form.getFieldDecorator(e.name, {rules: e.rules, initialValue: row.action === Operate.Update ? values[e.name]: null })
               (<Input placeholder="请输入"/>)
             }
-          </FormItem>
-        })
-      }
+          </Item>
+        })}
+        </Form>
+
       </Modal>
     );
   };
 }
-export default (Form.create({name: 'TableRowUpdateAndAdd'})(TableRowUpdateAndAdd) as any);
+export default (Form.create()(TableRowUpdateAndAdd) as any);
