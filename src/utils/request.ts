@@ -63,12 +63,37 @@ const request = extend({
   errorHandler, // 默认错误处理
   credentials: 'include', // 默认请求是否带上cookie
 });
+interface Tenant {
+  tenantname?: string;
+  tenantcode?: string;
+}
+
+function findTenant(datum: Array<object>, tenantid: number | number):Tenant {
+  for (let i = 0 ; i <  datum.length; i++){
+    if (datum[i]['id'] === tenantid) {
+      return {
+        tenantcode: datum[i]['tenantcode'],
+        tenantname: datum[i]['tenantname']
+      }
+    }
+  }
+  return {}
+}
+
 request.interceptors.response.use(async (response, options)=> {
   if (response.status === 200) {
     const data = await response.clone().json();
     if (data.hasOwnProperty('entityList')) {
       data['data'] = data.entityList
       delete data['entityList']
+      // 是否是订阅
+      if (options.data.code === 'getSubscribeAppList') {
+        data.data.forEach( (d: any) => {
+          let temp = findTenant( data['tenantList'], d.tenantid)
+          d.tenantcode = temp.tenantcode
+          d.tenantname = temp.tenantname
+        })
+      }
       return data
     }
   }

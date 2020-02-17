@@ -20,7 +20,6 @@ class UserInfo extends Component<UserInfoProps> {
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         // 请求修改
-        console.log('UserInfo.update', values)
         const { dispatch } = this.props;
         dispatch({
           type: 'merchantUser/updateMerchantUserInfo',

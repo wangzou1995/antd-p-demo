@@ -1,5 +1,4 @@
 export interface SubScribeTableListItem {
-  key: number;
   id: number;
   tenantcode: string,
   tenantname: string,

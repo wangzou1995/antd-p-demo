@@ -5,7 +5,7 @@ export async function queryApp(params?: { pageSize?: number; current?: number; [
   return request(BASE_URL, {
     method: 'POST',
     data: {
-      code: 'getSubscribeAppList',
+      code: 'getAppListPage',
       entity: {
         ...params,
         page: {pageSize: params?.pageSize, pageIndex: params?.current},

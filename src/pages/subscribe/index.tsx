@@ -58,7 +58,7 @@ const TableList: React.FC<TableListProps> = () => {
   const [modalVisible, handleModalVisible] = useState<boolean>(false);
   const [action, handleAction] = useState<string>('');
   const [tableItem, setTableItem] = useState<SubScribeTableListItem>(
-    {key: -1,
+    {
       id: -1,
       tenantcode: "system",
 		  tenantname: "系统商户",
@@ -165,7 +165,7 @@ const TableList: React.FC<TableListProps> = () => {
       <ProTable<SubScribeTableListItem>
         headerTitle="查询表格"
         actionRef={actionRef}
-        rowKey="prodcode"
+        rowKey="id"
         toolBarRender={(action, {selectedRows}) => [
           <Button icon="plus" type="primary" onClick={() => {
             handleAction(Operate.Add)

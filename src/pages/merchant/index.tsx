@@ -8,8 +8,12 @@ import {TableListItem} from './data.d';
 import TableRowUpdateAndAdd from "@/components/Base/TableRowUpdateAndAdd";
 import BaseTableListUtil from '../../components/Base/util';
 import Operate from '../../components/Base/Opreate';
+import {ConnectProps} from "@/models/connect";
 
-interface TableListProps extends FormComponentProps {
+
+
+
+interface TableListProps extends FormComponentProps, ConnectProps {
 }
 
 /**
@@ -17,7 +21,13 @@ interface TableListProps extends FormComponentProps {
  * @param fields
  */
 const handleAdd = async (fields: TableListItem) => {
+
   const hide = message.loading('正在添加');
+  for (let prop in fields) {
+    if (fields[prop] === null) {
+      fields[prop] = ""
+    }
+  }
   try {
     await addTenant({
       ...fields
@@ -32,6 +42,7 @@ const handleAdd = async (fields: TableListItem) => {
   }
 };
 
+
 /**
  * 更新节点
  * @param fields
@@ -43,7 +54,6 @@ const handleUpdate = async (fields: TableListItem) => {
       ...fields
     });
     hide();
-
     message.success('配置成功');
     return true;
   } catch (error) {
@@ -53,12 +63,11 @@ const handleUpdate = async (fields: TableListItem) => {
   }
 };
 
-
 const TableList: React.FC<TableListProps> = () => {
   const [modalVisible, handleModalVisible] = useState<boolean>(false);
   const [action, handleAction] = useState<string>('');
   const [tableItem, setTableItem] = useState<TableListItem>(
-    {key: -1, id: -1, tenantcode: '', tenantname: '', samplename: '', signkey: '', gatewayurl: ''}
+    { id: -1, tenantcode: '', tenantname: '', samplename: '', signkey: '', gatewayurl: ''}
   );
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<TableListItem>[] = [
@@ -105,6 +114,7 @@ const TableList: React.FC<TableListProps> = () => {
   return (
     <PageHeaderWrapper>
       <ProTable<TableListItem>
+        search={false}
         headerTitle="查询表格"
         actionRef={actionRef}
         rowKey="tenantcode"

@@ -1,5 +1,4 @@
 export interface TableListItem {
-  key: number;
   id: number;
   tenantcode: string;
   tenantname: string;
@@ -22,7 +21,6 @@ export interface TableListData {
 export interface TableListParams {
   tenantname: string;
   tenantcode: string;
-  key?: number;
   pageSize?: number;
   currentPage?: number;
 }

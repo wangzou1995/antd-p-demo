@@ -4,8 +4,9 @@ import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import { FormComponentProps } from 'antd/es/form';
 import {Button, Card, Form, Input} from "antd";
 import { connect } from 'dva';
+import {ConnectProps} from "@/models/connect";
 const FormItem = Form.Item;
-export interface UserInfoProps extends FormComponentProps  {
+export interface UserInfoProps extends FormComponentProps, ConnectProps  {
   submitting: boolean;
   loginname?: string;
   nickname?: string;
@@ -22,6 +23,16 @@ class UserInfo extends Component<UserInfoProps> {
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         // 请求修改
+        console.log(values)
+        const { dispatch } = this.props;
+        dispatch({
+          type: 'merchantUser/updatePassword',
+          payload: {
+            entity: { password: values.password,
+              password1: values.newpassword,
+              password2: values.subpassword},
+          },
+        });
       }
     });
   };
@@ -64,7 +75,7 @@ class UserInfo extends Component<UserInfoProps> {
                   },
                 ],
               })(
-                <Input
+                <Input  type="password"
                   placeholder={formatMessage({ id: 'formandbasic-form.password.placeholder' })}
                 />,
               )}
@@ -73,7 +84,7 @@ class UserInfo extends Component<UserInfoProps> {
               {...formItemLayout}
               label={<FormattedMessage id="formandbasic-form.newpassword.label" />}
             >
-              {getFieldDecorator('nickname', {
+              {getFieldDecorator('newpassword', {
                 rules: [
                   {
                     required: true,
@@ -81,7 +92,7 @@ class UserInfo extends Component<UserInfoProps> {
                   },
                 ],
               })(
-                <Input
+                <Input  type="password"
                   placeholder={formatMessage({ id: 'formandbasic-form.newpassword.placeholder' })}
                 />,
               )}
@@ -90,7 +101,7 @@ class UserInfo extends Component<UserInfoProps> {
               {...formItemLayout}
               label={<FormattedMessage id="formandbasic-form.subpassword.label" />}
             >
-              {getFieldDecorator('mobile', {
+              {getFieldDecorator('subpassword', {
                 rules: [
                   {
                     required: true,
@@ -98,17 +109,14 @@ class UserInfo extends Component<UserInfoProps> {
                   },
                 ],
               })(
-                <Input
+                <Input type="password"
                   placeholder={formatMessage({ id: 'formandbasic-form.subpassword.placeholder' })}
                 />,
               )}
             </FormItem>
-            <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
+            <FormItem {...submitFormLayout} style={{ marginTop: 32, textAlign: 'right' }}>
               <Button type="primary" htmlType="submit" loading={submitting}>
                 <FormattedMessage id="formandbasic-form.form.submit" />
-              </Button>
-              <Button style={{ marginLeft: 8 }}>
-                <FormattedMessage id="formandbasic-form.form.refresh" />
               </Button>
             </FormItem>
           </Form>

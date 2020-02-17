@@ -6,6 +6,7 @@ import { DefaultSettings as SettingModelState } from '../../config/defaultSettin
 import { UserModelState } from './user';
 import { StateType } from './login';
 import { MerchantUserModelState } from './merchantUser'
+import {TableListItem} from "@/pages/merchant/data";
 
 export { GlobalModelState, SettingModelState, UserModelState, MerchantUserModelState };
 
@@ -19,6 +20,7 @@ export interface Loading {
     user?: boolean;
     login?: boolean;
     merchantUser?: boolean;
+    merchant?: boolean;
   };
 }
 
@@ -29,6 +31,7 @@ export interface ConnectState {
   user: UserModelState;
   login: StateType;
   merchantUser: MerchantUserModelState;
+  merchant: TableListItem;
 }
 
 export interface Route extends MenuDataItem {

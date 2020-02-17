@@ -1,7 +1,7 @@
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 import { notification } from 'antd';
-import { queryCurrent, query as queryUsers, updateMerchantUserInfo } from '@/services/merchantUser';
+import {queryCurrent, updateMerchantUserInfo, resetPassword} from '@/services/merchantUser';
 
 export interface CurrentMerchantUser {
   loginname?: string;
@@ -13,7 +13,11 @@ export interface CurrentMerchantUser {
   mobileverify?: boolean;
   emailverify? :boolean;
 }
-
+export interface ResetPassword {
+  password?: string;
+  password1? : string;
+  password2? : string;
+}
 export interface MerchantUserModelState {
   currentUser?: CurrentMerchantUser;
 }
@@ -22,9 +26,9 @@ export interface MerchantUserModelType {
   namespace: 'merchantUser';
   state: MerchantUserModelState;
   effects: {
-    fetch: Effect;
     fetchCurrent: Effect;
-    updateMerchantUserInfo: Effect
+    updateMerchantUserInfo: Effect;
+    updatePassword: Effect;
   };
   reducers: {
     saveCurrentUser: Reducer<MerchantUserModelState>;
@@ -40,13 +44,6 @@ const MerchantUserModel: MerchantUserModelType = {
   },
 
   effects: {
-    *fetch(_, { call, put }) {
-      const response = yield call(queryUsers);
-      yield put({
-        type: 'save',
-        payload: response,
-      });
-    },
     *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
       yield put({
@@ -59,11 +56,23 @@ const MerchantUserModel: MerchantUserModelType = {
       if (response.result) {
         notification.success({
           message: '更新成功！'
-        })
+        });
         yield put({
           type: 'updateCurrentUser',
           payload: payload,
         });
+      }
+    },
+    *updatePassword({ payload }, {call}){
+      const response = yield call(resetPassword, payload.entity);
+      if (response.result) {
+        notification.success({
+          message: '重置成功！'
+        })
+      } else {
+        notification.warn({
+          message: response.message
+        })
       }
     }
   },

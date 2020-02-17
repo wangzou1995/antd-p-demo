@@ -22,21 +22,21 @@ export async function removeTenant(params: { key: number[] }) {
 }
 
 export async function addTenant(params: TableListItem) {
-  return request('/api/rule', {
+  return request(BASE_URL, {
     method: 'POST',
     data: {
-      params,
-      method: 'post',
-    },
+      code: "insertTenant",
+      entity: params
+    }
   });
 }
 
 export async function updateTenant(params: TableListParams) {
-  return request('/api/rule', {
+  return request(BASE_URL, {
     method: 'POST',
     data: {
-      params,
-      method: 'update',
-    },
+      code: "updateTenant",
+      entity: params
+    }
   });
 }

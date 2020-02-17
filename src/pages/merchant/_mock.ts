@@ -7,7 +7,6 @@ let tableListDataSource: TableListItem[] = [];
 
 for (let i = 0; i < 10; i += 1) {
   tableListDataSource.push({
-    key: i,
     id: i,
     tenantcode: `tenantCode ${i}`,
     tenantname: `商户 ${i}`,
@@ -63,7 +62,7 @@ function postTenant(req: Request, res: Response, u: string, b: Request) {
   switch (method) {
     /* eslint no-case-declarations:0 */
     case 'delete':
-      tableListDataSource = tableListDataSource.filter(item => params.key.indexOf(item.key) === -1);
+      tableListDataSource = tableListDataSource.filter(item => params.id.indexOf(item.id) === -1);
       break;
     case 'post':
       const i = Math.ceil(Math.random() * 10000);
@@ -75,7 +74,7 @@ function postTenant(req: Request, res: Response, u: string, b: Request) {
       break;
     case 'update':
       tableListDataSource = tableListDataSource.map(item => {
-        if (item.key === params.key) {
+        if (item.id === params.id) {
           return {...item, ...params};
         }
         return item;

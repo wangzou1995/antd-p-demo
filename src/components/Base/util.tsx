@@ -9,17 +9,17 @@ export default  class BaseTableListUtil {
         let result
         let cols: { name: string; label: string; rules: { required: boolean; message: string; }[]; }[] = []
         columns.forEach((element: {dataIndex: string; title: string}) => {
-          if (element) 
+          if (element)
               if (element.dataIndex && element.title) {
                 if (element.title !== '操作') {
                   let col = {
                     name: element.dataIndex,
                     label: element.title + '',
-                    rules: [{ required: true, message: '请输入' + element.title }]
+                    rules: [{ required: element.title === '商户号' || element.title === '商户名称', message: '请输入' + element.title }]
                   }
                   cols.push(col)
                 }
-              }   
+              }
           });
           console.log('createRow', cols)
           result = {
