@@ -81,7 +81,7 @@ const Model: LoginModelType = {
       // Note: There may be security issues, please note
       if (window.location.pathname !== '/user/login' && !redirect) {
         // 清楚token
-        window.localStorage.removeItem('yw_token')
+        sessionStorage.removeItem('yw_token')
         router.replace({
           pathname: '/user/login',
           search: stringify({

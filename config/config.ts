@@ -115,31 +115,31 @@ export default {
             {
               path:'/app',
               name: 'app',
-              icon: 'usergroup-add',
+              icon: 'appstore',
               component: './app',
             },
             {
               path:'/subscribe',
               name: 'subscribe',
-              icon: 'usergroup-add',
+              icon: 'pull-request',
               component: './subscribe',
             },
             {
               path:'/market',
               name: 'market',
-              icon: 'usergroup-add',
+              icon: 'shopping-cart',
               component: './market',
             },
             {
               path:'/order',
               name: 'order',
-              icon: 'usergroup-add',
+              icon: 'transaction',
               component: './order',
             },
             {
               path:'/approval',
               name: 'approval',
-              icon: 'usergroup-add',
+              icon: 'file-protect',
               component: './approval',
             },
             {
