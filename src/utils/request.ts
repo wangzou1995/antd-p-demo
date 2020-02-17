@@ -31,9 +31,9 @@ const errorHandler = (error: { response: Response }): Response | undefined => {
   if (response && response.status) {
     if (response.status === 401) {
       // 判断是否存在过期token
-      let token = localStorage.getItem('yw_token')
+      let token = sessionStorage.getItem('yw_token')
       if (token) {
-        localStorage.removeItem('yw_token')
+        sessionStorage.removeItem('yw_token')
       }
       router.push('/user/login');
       return;
@@ -46,10 +46,11 @@ const errorHandler = (error: { response: Response }): Response | undefined => {
       });
     }
   } else if (!response) {
-    notification.error({
-      description: '您的网络发生异常，无法连接服务器',
-      message: '网络异常',
-    });
+    // notification.error({
+    //   description: '您的网络发生异常，无法连接服务器',
+    //   message: '网络异常',
+    // });
+    router.push('/user/login');
   }
   return response;
 };
@@ -74,7 +75,8 @@ request.interceptors.response.use(async (response, options)=> {
   return response;
 })
 request.interceptors.request.use((url, options) => {
-  let token = localStorage.getItem("yw_token");
+  let token = sessionStorage.getItem("yw_token");
+  console.log(token)
   const headers = {
     'Content-Type': 'application/json',
   //‘Content-Type‘: ‘application/x-www-form-urlencoded‘,
@@ -85,9 +87,9 @@ request.interceptors.request.use((url, options) => {
   } else {
     // 判断是否在执行登录操作
     if ('/merchant/loginInterface' !== url) {
-      return {
-        url: '/login'
-      }
+      return ({
+        url: '/user/login'
+      });
     }
   }
   return (

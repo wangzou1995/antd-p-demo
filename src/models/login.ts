@@ -6,14 +6,14 @@ import router from 'umi/router';
 import { fakeAccountLogin, getFakeCaptcha, logout } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
-import {setToken} from "@/utils/token";
+// import {setToken} from "@/utils/token";
 import {notification} from "antd";
 
 export interface StateType {
   status?: 'ok' | 'error';
   type?: string;
   currentAuthority?: 'user' | 'guest' | 'admin';
-  token: string
+  token?: string
 }
 
 export interface LoginModelType {
@@ -34,7 +34,7 @@ const Model: LoginModelType = {
 
   state: {
     status: undefined,
-    token: ''
+    token: undefined
   },
 
   effects: {
@@ -95,7 +95,8 @@ const Model: LoginModelType = {
   reducers: {
     changeLoginStatus(state, { payload }) {
       setAuthority('admin');
-      setToken(payload.entity.access_token)
+      // setToken(payload.entity.access_token)
+      sessionStorage.setItem('yw_token',payload.entity.access_token)
       return {
         ...state,
         status: payload.result,
