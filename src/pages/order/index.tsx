@@ -36,7 +36,8 @@ const TableList: React.FC<TableListProps> = () => {
     },
     {
       title: '订阅时间',
-      dataIndex: 'publishdate'
+      dataIndex: 'publishdate',
+      valueType: 'dateTime'
     },
     {
       title: '版本',

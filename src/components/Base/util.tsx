@@ -21,7 +21,6 @@ export default  class BaseTableListUtil {
                 }
               }
           });
-          console.log('createRow', cols)
           result = {
             cols: cols,
             title: action === Operate.Update ? '编辑' + title : '新增' + title,

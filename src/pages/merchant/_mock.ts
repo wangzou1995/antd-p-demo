@@ -57,7 +57,7 @@ function postTenant(req: Request, res: Response, u: string, b: Request) {
 
   const body = (b && b.body) || req.body;
   console.log(" body", body)
-  const {method, params } = body;
+  const {method, params} = body;
 
   switch (method) {
     /* eslint no-case-declarations:0 */
@@ -85,12 +85,11 @@ function postTenant(req: Request, res: Response, u: string, b: Request) {
   }
 
   const result = {
-    list: tableListDataSource,
+    data: tableListDataSource,
     pagination: {
       total: tableListDataSource.length,
     },
   };
-
   return res.json(result);
 }
 

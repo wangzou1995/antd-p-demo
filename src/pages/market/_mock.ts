@@ -99,7 +99,7 @@ function postMarket(req: Request, res: Response, u: string, b: Request) {
   }
 
   const result = {
-    list: tableListDataSource,
+    data: tableListDataSource,
     pagination: {
       total: tableListDataSource.length,
     },

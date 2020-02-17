@@ -83,7 +83,6 @@ function postApp(req: Request, res: Response, u: string, b: Request) {
     case 'post':
       const i = Math.ceil(Math.random() * 10000);
       tableListDataSource.unshift({
-        key: i,
         id: i,
         ...params
       });
@@ -101,7 +100,7 @@ function postApp(req: Request, res: Response, u: string, b: Request) {
   }
 
   const result = {
-    list: tableListDataSource,
+    data: tableListDataSource,
     pagination: {
       total: tableListDataSource.length,
     },

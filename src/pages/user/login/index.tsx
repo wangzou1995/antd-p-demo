@@ -42,7 +42,6 @@ class Login extends Component<LoginProps, LoginState> {
 
   handleSubmit = (err: unknown, values: LoginParamsType) => {
     const { type } = this.state;
-    console.log('values', values)
     if (!err) {
       const { dispatch } = this.props;
       dispatch({

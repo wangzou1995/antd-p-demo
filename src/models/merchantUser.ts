@@ -81,13 +81,13 @@ const MerchantUserModel: MerchantUserModelType = {
     saveCurrentUser(state, action) {
       return {
         ...state,
-        currentUser: action.payload.entity || {},
+        currentUser: action.payload && action.payload.entity || {},
       };
     },
     updateCurrentUser (state,action){
       return {
         ...state,
-        currentUser:  action.payload.entity || {},
+        currentUser:  action.payload && action.payload.entity || {},
       }
     }
   },

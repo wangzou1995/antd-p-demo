@@ -113,7 +113,7 @@ request.interceptors.request.use((url, options) => {
     // 判断是否在执行登录操作
     if ('/merchant/loginInterface' !== url) {
       return ({
-        url: '/user/login'
+        url: 'login'
       });
     }
   }
