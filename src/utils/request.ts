@@ -101,7 +101,6 @@ request.interceptors.response.use(async (response, options)=> {
 })
 request.interceptors.request.use((url, options) => {
   let token = sessionStorage.getItem("yw_token");
-  console.log(token)
   const headers = {
     'Content-Type': 'application/json',
   //‘Content-Type‘: ‘application/x-www-form-urlencoded‘,
@@ -110,6 +109,7 @@ request.interceptors.request.use((url, options) => {
   if (null !== token && '/merchant/loginInterface' !== url) {
     headers['Authorization'] = 'Bearer ' + token.replace(/\"/g, "")
   } else {
+    console.log(url)
     // 判断是否在执行登录操作
     if ('/merchant/loginInterface' !== url) {
       return ({

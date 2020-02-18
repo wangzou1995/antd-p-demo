@@ -40,6 +40,7 @@ const Model: LoginModelType = {
   effects: {
     *login({ payload }, { call, put }) {
       const response = yield call(fakeAccountLogin, payload);
+      console.log(response)
       if (response.result) {
         yield put({
           type: 'changeLoginStatus',
@@ -49,10 +50,12 @@ const Model: LoginModelType = {
           const urlParams = new URL(window.location.href);
           const params = getPageQuery();
           let { redirect } = params as { redirect: string };
+          console.log(redirect)
           if (redirect) {
             const redirectUrlParams = new URL(redirect);
             if (redirectUrlParams.origin === urlParams.origin) {
               redirect = redirect.substr(urlParams.origin.length);
+              console.log('1',redirect)
               if (redirect.match(/^\/.*#/)) {
                 redirect = redirect.substr(redirect.indexOf('#') + 1);
               }
@@ -61,7 +64,8 @@ const Model: LoginModelType = {
               return;
             }
           }
-          router.replace(redirect || '/');
+          console.log(redirect || '/welcome')
+          router.replace(redirect || '/welcome');
       } else {
         notification.error(
           {
