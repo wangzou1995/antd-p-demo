@@ -227,7 +227,7 @@ export default {
   // },
   proxy: {
     '/merchant/': {  //匹配所有以/api/为开头的接口
-      target: 'http://localhost:6660/', //后端服务器地址
+      target: 'http://56.56.59.15:6660/', //后端服务器地址
       changeOrigin: true,
       pathRewrite: { '^/merchant/': '' },  //因为我们项目的接口前面并没有api 所以直接去掉
     },
