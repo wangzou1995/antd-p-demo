@@ -115,7 +115,6 @@ const TableList: React.FC<TableListProps> = () => {
     <PageHeaderWrapper>
       <ProTable<TableListItem>
         search={false}
-        headerTitle="查询表格"
         actionRef={actionRef}
         rowKey="tenantcode"
         toolBarRender={(action, {selectedRows}) => [

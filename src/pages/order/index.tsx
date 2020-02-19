@@ -51,7 +51,6 @@ const TableList: React.FC<TableListProps> = () => {
   return (
     <PageHeaderWrapper>
       <ProTable<TableListItem>
-        headerTitle="查询表格"
         actionRef={actionRef}
         rowKey="pordcode"
         request={params => queryOrder(params)}

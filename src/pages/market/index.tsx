@@ -89,7 +89,6 @@ const TableList: React.FC<TableListProps> = () => {
   return (
     <PageHeaderWrapper>
       <ProTable<MarketTableListItem>
-        headerTitle="查询表格"
         actionRef={actionRef}
         rowKey="id"
         request={params => queryMarket(params)}
