@@ -88,6 +88,22 @@ export default {
       ],
     },
     {
+      path: '/oauth',
+      component: '../layouts/OauthLayout',
+      routes: [
+        {
+          path: '/oauth/login',
+          component: '../pages/oauth',
+          name: 'oauthLogin',
+          query:{
+            systemName: "",
+            callback_url: ""
+          }
+        },
+      ],
+    },
+
+    {
       path: '/',
       component: '../layouts/SecurityLayout',
       routes: [
