@@ -28,13 +28,14 @@ const OauthLayout: React.FC<UserLayoutProps> = props => {
 
       <div className={styles.container}>
         <div className={styles.lang}>
+          <span className={styles.title}>{history?.location["query"]["systemName"]}</span>
         </div>
         <div className={styles.content}>
           <div className={styles.top}>
             <div className={styles.header}>
               <Link to="/">
                 {/*<span className={styles.title}>商户控制台</span>*/}
-                <span className={styles.title}>{history?.location["query"]["systemName"]}</span>
+
               </Link>
             </div>
           </div>

@@ -1,5 +1,7 @@
 export default {
   'user-login.login.userName': '用户名',
+  'user-login.login.tenantname': '商户号',
+  'user-login.tenantname.required':'请输入商户号',
   'user-login.login.password': '密码',
   'user-login.login.message-invalid-credentials': '账户或密码错误（admin/ant.design）',
   'user-login.login.message-invalid-verification-code': '验证码错误',

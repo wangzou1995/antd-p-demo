@@ -32,6 +32,8 @@ class Login extends Component<LoginProps, LoginState> {
 
   public static Submit = LoginSubmit;
 
+  public static Merchant: React.FunctionComponent<LoginItemProps>;
+
   public static UserName: React.FunctionComponent<LoginItemProps>;
 
   public static Password: React.FunctionComponent<LoginItemProps>;

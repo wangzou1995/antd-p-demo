@@ -93,16 +93,41 @@ export default {
       routes: [
         {
           path: '/oauth/login',
-          component: '../pages/oauth',
+          component: './oauth/login',
           name: 'oauthLogin',
-          query:{
+          query: {
             systemName: "",
             callback_url: ""
           }
         },
+        {
+          path: '/oauth/register',
+          component: './oauth/register',
+          name: 'register',
+        },
+        {
+          path: '/oauth/reset',
+          component: './oauth/reset',
+          name: 'reset',
+        }
       ],
     },
-
+    {
+      path: '/users',
+      component: '../layouts/BlankLayout',
+      routes: [
+        {
+          path: '/users/register',
+          component: './users/register',
+          name: 'register',
+        },
+        {
+          path: '/users/reset',
+          component: './users/reset',
+          name: 'reset',
+        }
+      ],
+    },
     {
       path: '/',
       component: '../layouts/SecurityLayout',
@@ -123,44 +148,44 @@ export default {
               component: './BaseWelcome',
             },
             {
-              path:'/merchant',
+              path: '/merchant',
               name: 'merchant',
               icon: 'usergroup-add',
               component: './merchant',
             },
             {
-              path:'/app',
+              path: '/app',
               name: 'app',
               icon: 'appstore',
               component: './app',
             },
             {
-              path:'/subscribe',
+              path: '/subscribe',
               name: 'subscribe',
               icon: 'pull-request',
               component: './subscribe',
             },
             {
-              path:'/market',
+              path: '/market',
               name: 'market',
               icon: 'shopping-cart',
               component: './market',
             },
             {
-              path:'/order',
+              path: '/order',
               name: 'order',
               icon: 'transaction',
               component: './order',
             },
             {
-              path:'/approval',
+              path: '/approval',
               name: 'approval',
               icon: 'file-protect',
               component: './approval',
             },
             {
               path: '/users',
-              routes:[
+              routes: [
                 {
                   path: '/users/info',
                   name: 'info',
@@ -169,7 +194,7 @@ export default {
                 {
                   path: '/users/password',
                   component: './users/password',
-                },
+                }
               ]
             },
             {
@@ -245,7 +270,7 @@ export default {
     '/merchant/': {  //匹配所有以/api/为开头的接口
       target: 'http://56.56.59.15:6660/', //后端服务器地址
       changeOrigin: true,
-      pathRewrite: { '^/merchant/': '' },  //因为我们项目的接口前面并没有api 所以直接去掉
+      pathRewrite: {'^/merchant/': ''},  //因为我们项目的接口前面并没有api 所以直接去掉
     },
   },
 } as IConfig;

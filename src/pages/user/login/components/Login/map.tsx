@@ -3,6 +3,20 @@ import React from 'react';
 import styles from './index.less';
 
 export default {
+  Merchant: {
+    props: {
+      size: 'large',
+      id: 'tenantName',
+      prefix: <Icon type="user" className={styles.prefixIcon} />,
+      placeholder: 'admin',
+    },
+    rules: [
+      {
+        required: true,
+        message: 'Please enter tenantName!',
+      },
+    ],
+  },
   UserName: {
     props: {
       size: 'large',
